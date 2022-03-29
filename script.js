@@ -1,14 +1,20 @@
 const dino = document.querySelector('.dino');
+const background = document.querySelector('.background')
+var isJumping = false;
 
 function handleKeyUp(event) {
     if (event.keyCode === 32) {
-        //console.log('Pressionada a tecla barra de espaço!');
-        jump();
+        if (!isJumping) {
+            //console.log('Pressionada a tecla barra de espaço!');
+            jump();
+        }
     }
 }
 
 function jump() {
     let position = 0;
+
+    isJumping = true;
 
     let upInterval = setInterval(() => {
         if (position >= 150){
@@ -18,6 +24,7 @@ function jump() {
             let downInterval = setInterval(() => {
                 if (position <= 0) {
                     clearInterval(downInterval);
+                    isJumping = false;
                 } else {
                     position -= 20;
                     dino.style.bottom = position + 'px';
@@ -39,4 +46,15 @@ function jump() {
 });
 */
 
+function createCactus() {
+    const cactus = document.createElement('div');
+    let cactusPosition = 1000;
+
+    cactus.classList.add('cactus');
+    cactus.style.left = 1000 + 'px';
+    background.appendChild(cactus);
+}
+
+
+createCactus();
 document.addEventListener('keyup', handleKeyUp);
